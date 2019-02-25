@@ -4,7 +4,7 @@ Crack Detection Project
 Project overview:
 
 Environment: Ubuntu 16.0.4
-Train time: 30 minutes on GTX 980m
+Train time: validation accuracy 81% with 30 minutes training on GTX 980m
 
 I used a pre_trained Xception model as a base convolution model, which is used
 for image feature extraction. I striped the top fully connected layers of the
@@ -27,7 +27,9 @@ image horizontally and vertically. I also rotate the image randomly between 0 an
 359 degrees. This technique is call data augmentation, which can be used to improve
 the validation loss and validation accuracy for small training data set.
 
-
+Future works:
+I can add fully connected layer of large size i.e. Dense(1024) instead of Dense(512)
+to improve model complexity and in turn to improve the validation accuracy.
 
 
 

@@ -32,29 +32,46 @@ model.load_weights("weight.hdf5")
 
 for i in os.listdir("ground_crack_samples"):
 	img = cv2.imread("ground_crack_samples/" + i)
-
+	img_static = cv2.imread("ground_crack_samples/" + i)
 	h = 50
 
+	predict = list()
 	for x in range(0, 480-h, h):
 		for y in range(0, 320-h, h):
-			cv2.rectangle(img, (x, y), (x+h, y+h), (0,128,0), 1)
-			crop_img = img[x:x+h, y:y+h]
+			crop_img = img_static[y:y+h, x:x+h]
 			cv2.imwrite("temp/t/a.jpg", crop_img)
 
 			predictGenerator = ImageDataGenerator(rescale=1./255)
 			traindata = predictGenerator.flow_from_directory("temp/", target_size=(100, 100), batch_size=64, class_mode='binary', shuffle=False)
 			y = model.predict_generator(traindata)
 
-			if y[0] > 0.5:
+			predict.append(float(y[0][0]))
+			# if float(y[0][0]) > 0.5:
+			# 	cv2.rectangle(img, (x, y), (x+h, y+h), (255,0,0), 3)
+			# 	print("drawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
+			# else:
+			# 	cv2.rectangle(img, (x, y), (x+h, y+h), (0,128,0), 1)
+			# 	print("@@@@@@@@@@@@@@@@@@@")
+
+			#os.remove("temp/t/a.jpg")
+
+	index = 0
+	for x in range(0, 480-h, h):
+		for y in range(0, 320-h, h):
+
+			if predict[index] > 0.5:
 				cv2.rectangle(img, (x, y), (x+h, y+h), (255,0,0), 3)
+				print("drawwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww")
+			else:
+				cv2.rectangle(img, (x, y), (x+h, y+h), (0,128,0), 1)
+				print("@@@@@@@@@@@@@@@@@@@")
 
-			cv2.imshow("1", img)
-			cv2.waitKey()
+			index += 1
 
-			os.remove("temp/t/a.jpg")
 
-	cv2.imshow("1", img)
-	cv2.waitKey()
+
+	# cv2.imshow("1", img)
+	# cv2.waitKey()
 	cv2.imwrite("ground_crack_sample_out/" + i, img)
 
 

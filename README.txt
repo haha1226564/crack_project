@@ -4,7 +4,7 @@ Crack Detection Project
 Project overview:
 
 Environment: Ubuntu 16.0.4
-Train time: validation accuracy 81% with 30 minutes training on GTX 980m
+Train time: validation accuracy 94% with 60 minutes training on GTX 980m
 
 I used a pre_trained Xception model as a base convolution model, which is used
 for image feature extraction. I striped the top fully connected layers of the
@@ -41,7 +41,7 @@ prediction method.
 I used convolution neural network approach for this crack detection task. I think traditional
 image processing based approach is also very suitable for this task. Specifically,
 we can use Morphological Operations to easily detect the crack with high accuracy. Then I can
-use model ensemble technique to dramatically improve the accuracy.  
+use model ensemble technique to dramatically improve the accuracy.
 
 
 

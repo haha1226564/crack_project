@@ -27,9 +27,16 @@ image horizontally and vertically. I also rotate the image randomly between 0 an
 359 degrees. This technique is call data augmentation, which can be used to improve
 the validation loss and validation accuracy for small training data set.
 
+Note: I train and validate my model using the on-line dataset. I did NOT train or
+validate my model on the dataset you provided. I usd the dataset you provided as a
+one time testing data set. I only test my model on the data set you provided one
+time in order to test the generalization of my model.
+
 Future works:
 I can add fully connected layer of large size i.e. Dense(1024) instead of Dense(512)
-to improve model complexity and in turn to improve the validation accuracy.
+to improve model complexity and in turn to improve the validation accuracy. Since the
+crack is continuous in some sense, I can also improve my model by using structured
+prediction method.
 
 
 

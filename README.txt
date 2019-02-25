@@ -34,9 +34,10 @@ time in order to test the generalization of my model.
 
 Future works:
 I can add fully connected layer of large size i.e. Dense(1024) instead of Dense(512)
-to improve model complexity and in turn to improve the validation accuracy. Since the
-crack is continuous in some sense, I can also improve my model by using structured
-prediction method.
+to improve model complexity and in turn to improve the validation accuracy. I can also
+increase the training time and use strong regulation function to increase the validation 
+accuracy.Since the crack is continuous in some sense, I can also improve my model by 
+using structured prediction method.
 
 I used convolution neural network approach for this crack detection task. I think traditional
 image processing based approach is also very suitable for this task. Specifically,

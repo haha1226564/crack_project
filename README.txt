@@ -38,6 +38,10 @@ to improve model complexity and in turn to improve the validation accuracy. Sinc
 crack is continuous in some sense, I can also improve my model by using structured
 prediction method.
 
+I used convolution neural network approach for this crack detection task. I think traditional
+image processing based approach is also very suitable for this task. Specifically,
+we can use Morphological Operations to easily detect the crack with high accuracy. Then I can
+use model ensemble technique to dramatically improve the accuracy.  
 
 
 

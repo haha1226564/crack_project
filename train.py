@@ -17,21 +17,39 @@ x = Dropout(0.5)(x)
 y = Dense(1, activation='sigmoid')(x)
 
 basemodel.trainable = False
+
+
 model = Model(inputs=inputs, outputs=y)
+#basemodel.summary()
 model.summary()
 
 trainGenerator = ImageDataGenerator(rescale=1./255, horizontal_flip = True, vertical_flip = True, rotation_range = 359)
 testGenerator = ImageDataGenerator(rescale=1./255, horizontal_flip = True, vertical_flip = True, rotation_range = 359)
 
-traindata = trainGenerator.flow_from_directory("data/train", target_size=(100, 100), batch_size=64, class_mode='binary')
+traindata = trainGenerator.flow_from_directory("../data/train", target_size=(100, 100), batch_size=64, class_mode='binary')
 
-validationdata = testGenerator.flow_from_directory("data/test", target_size=(100, 100), batch_size=64, class_mode='binary')
+validationdata = testGenerator.flow_from_directory("../data/test", target_size=(100, 100), batch_size=64, class_mode='binary')
 
 checkpointer = ModelCheckpoint(filepath = "weight.hdf5", save_best_only=True, save_weights_only=True)
 
 model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.RMSprop(), metrics=['acc'])
 
-#model.load_weights("weight.hdf5")
+model.load_weights("weight.hdf5", by_name=True)
+
+
+
+basemodel.trainable = True
+
+for i in basemodel.layers:
+	if i.name == 'block14_sepconv1' or i.name == 'block14_sepconv1_bn' or i.name == 'block14_sepconv2' or i.name == 'block14_sepconv2_bn':
+		i.trainable = True
+		print(i, "==============================================")
+	else:
+		i.trainable = False
+
+model.compile(loss='binary_crossentropy', optimizer=keras.optimizers.RMSprop(), metrics=['acc'])
+
+model.summary()
 
 model.fit_generator(traindata,
       steps_per_epoch=98,
